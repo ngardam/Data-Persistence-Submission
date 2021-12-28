@@ -8,11 +8,20 @@ using UnityEngine.UI;
 public class MainManager : MonoBehaviour
 {
 
+    public List<(string, int)> highScores = new List<(string, int)>();
+
     public static MainManager Instance;
+
+    public string playerName;
 
 
     private void Awake()
     {
+
+        //test high score
+        highScores.Add(("Joe", 1));
+
+
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -37,10 +46,39 @@ public class MainManager : MonoBehaviour
 
     }
 
+    public void SubmitScore(string name, int score)
+    {
+        //bool inTopTen = false;
+        for (int i = 0; i < highScores.Count; i++)
+        {
+            if (highScores[i].Item2 < score)
+            {
+                //inTopTen = true;
+                highScores.Insert(i, (name, score));
+                RemoveEleventhPlace();
+                return;
+            }
+
+        }
+    }
+
+    private void RemoveEleventhPlace()
+    {
+        if (highScores.Count > 10)
+        {
+            highScores.RemoveAt(10);
+        }
+    }
+
  
     private void StartGame()
     {
 
+    }
+
+    public void SetName(string newName)
+    {
+        playerName = newName;
     }
 
 
@@ -59,6 +97,17 @@ public class MainManager : MonoBehaviour
 
     public void MainMenuButton()
     {
+        SceneManager.LoadScene(0);
+    }
 
+    public void HighScoresButton()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    [serializable]
+    public class SaveData
+    {
+        public (string, int)[] highScores;
     }
 }

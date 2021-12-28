@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
+    public string playerName;
+
     public Text ScoreText;
+
+    [SerializeField] Text highScoreText;
+
     public GameObject GameOverText;
 
     private bool m_Started = false;
@@ -33,7 +38,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       // UpdateHighScore();
+        playerName = MainManager.Instance.playerName;
+        UpdateHighScore();
         LoadLevel();
+        AddPoint(0);
+        
         //  const float step = 0.6f;
         //  int perLine = Mathf.FloorToInt(4.0f / step);
         //  
@@ -106,13 +116,21 @@ public class GameManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"Name: " + playerName + " Score: " + m_Points;
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        SubmitScore(playerName, m_Points);
+        UpdateHighScore();
+
+    }
+
+    private void SubmitScore(string _name, int score)
+    {
+        MainManager.Instance.SubmitScore(_name, score);
     }
 
   //  public void StartGameButton()
@@ -127,4 +145,17 @@ public class GameManager : MonoBehaviour
   //      //  ScoreText = GameObject.Find("Score Text").GetComponent<Text>();
   //
   //  }
+
+    public void MainMenuButton()
+    {
+        MainManager.Instance.MainMenuButton();
+    }
+
+
+    public void UpdateHighScore()
+    {
+        (string, int) _highscore = MainManager.Instance.highScores[0];
+
+        highScoreText.text = "Best Score: " + _highscore.Item1 + "  " + _highscore.Item2;
+    }
 }
