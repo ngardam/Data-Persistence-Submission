@@ -332,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b3dc7c6205945428e7fbb106b59a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namesText: {fileID: 0}
-  scoresText: {fileID: 0}
+  namesText: {fileID: 786134853}
+  scoresText: {fileID: 304767849}
 --- !u!4 &325491791
 Transform:
   m_ObjectHideFlags: 0
@@ -1002,13 +1002,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1289398561}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1289398562}
+        m_TargetAssemblyTypeName: MenuUIHandler, Assembly-CSharp
+        m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
